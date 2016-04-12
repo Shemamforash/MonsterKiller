@@ -1,0 +1,57 @@
+h1 {
+  font-family: monospace;
+  font-size: 50;
+  color: white;
+  text-align: center;
+  width: 600;
+  position: relative;
+  z-index: -1;
+}
+
+table {
+  border-style: none;
+}
+
+#left {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 250px;
+  height: 100%;
+}
+
+#right {
+  float: right;
+  width: auto;
+}
+
+.table_button {
+  width: 200px;
+  height: 40px;
+  font-size: 17px;
+  background-color: black;
+  color: white;
+  transition-duration: 0.2;
+  border: none;
+  text-align: left;
+}
+
+.table_quantity {
+  width: 50px;
+  height: 40px;
+  font-size: 17px;
+  background-color: black;
+  color: white;
+  transition-duration: 0.2;
+  border: none;
+  text-align: right;
+}
+
+.table_button:hover {
+  background-color: #151515;
+}
+
+.table_button:active {
+  background-color: #AAAAAA;
+  color: #151515;
+}
