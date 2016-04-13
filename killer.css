@@ -8,6 +8,16 @@ h1 {
   z-index: -1;
 }
 
+h2 {
+ font-family: monospace;
+ font-size: 30;
+ color: white;
+ text-align: center;
+ width: 600;
+ position: relative;
+ z-index: -1;
+}
+
 table {
   border-style: none;
 }
@@ -16,17 +26,55 @@ table {
   position: absolute;
   top: 10px;
   left: 10px;
-  width: 250px;
-  height: 100%;
+  width: 300px;
+  height: 90%;
 }
 
 #right {
   float: right;
   width: auto;
+  height: 90%;
+}
+
+.world_button {
+  height: 30px;
+  width: 160px;
+  word-wrap: normal;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  border: none;
+}
+
+#bottom {
+  height: 10%;
+  width: 100%;
+  clear: both;
+}
+
+#world_table {
+  margin: auto;
+}
+
+#world_selected {
+  position: relative;;
+  width: 159px;
+  height: 30px;
+  background-color: #666666;
+  border: none;
+  z-index: -1;
+}
+
+.world_button:hover {
+  background-color: #151515;
+}
+
+.world_button:active {
+  background-color: #AAAAAA;
+  color: #151515;
 }
 
 .table_button {
-  width: 200px;
+  width: 250px;
   height: 40px;
   font-size: 17px;
   background-color: black;

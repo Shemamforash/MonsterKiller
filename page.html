@@ -3,28 +3,57 @@
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="main.js"></script>
+    <script src="inputoutput.js"></script>
     <link rel="stylesheet" type="text/css" href="killer.css">
     <header>
       MonsterKiller
     </header>
   </head>
-  <body style="background-color: black;">
+  <body style="background-color: black;" onkeydown="keyDown(event)" onkeyup="keyUp(event)">
     <h1></h1>
+    <h2></h2>
     <div id="right">
     </div>
     <div id="left">
       <table id="units_table">
         <tr>
-          <td><button class="table_button" id="farmer">A forgetful farmer</button></td>
-          <td><button class="table_quantity" id="farmer_quantity">0</button></td>
+          <td><button class="table_button" id="farmer"></button></td>
+          <td><button class="table_quantity" id="farmer_quantity"></button></td>
         </tr>
         <tr>
-          <td><button class="table_button" id="barmaid">A busty barmaid</button></td>
-          <td><button class="table_quantity" id="barmaid_quantity">0</button></td>
+          <td><button class="table_button" id="barmaid"></button></td>
+          <td><button class="table_quantity" id="barmaid_quantity"></button></td>
         </tr>
         <tr>
-          <td><button class="table_button" id="valkyrie">A vengeful valkyrie</button></td>
-          <td><button class="table_quantity" id="valkyrie_quantity">0</button></td>
+          <td><button class="table_button" id="militiaman"></button></td>
+          <td><button class="table_quantity" id="militiaman_quantity"></button></td>
+        </tr>
+        <tr>
+          <td><button class="table_button" id="barbarian"></button></td>
+          <td><button class="table_quantity" id="barbarian_quantity"></button></td>
+        </tr>
+        <tr>
+          <td><button class="table_button" id="valkyrie"></button></td>
+          <td><button class="table_quantity" id="valkyrie_quantity"></button></td>
+        </tr>
+        <tr>
+          <td><button class="table_button" id="demigod"></button></td>
+          <td><button class="table_quantity" id="demigod_quantity"></button></td>
+        </tr>
+      </table>
+    </div>
+    <div id="bottom">
+      <div id="world_selected"></div>
+      <table id="world_table">
+        <tr>
+          <td><button class="world_button" id="tired_terra">the tired terra</button></td>
+          <td><button class="world_button" id="raucous_reach">the raucous reach</button></td>
+          <td><button class="world_button" id="deepest_depths">the deepest depths</button></td>
+          <td><button class="world_button" id="worrisome_wasteland">the worrisome wasteland</button></td>
+          <td><button class="world_button" id="frigid_forest">the frigid forest</button></td>
+          <td><button class="world_button" id="derelict_desert">the derelict desert</button></td>
+          <td><button class="world_button" id="copius_canopy">the copious canopy</button></td>
+          <td><button class="world_button" id="noxius_nightmare">the noxious nightmare</button></td>
         </tr>
       </table>
     </div>
