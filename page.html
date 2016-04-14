@@ -4,6 +4,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="main.js"></script>
     <script src="inputoutput.js"></script>
+    <script src="raucous.js"></script>
     <link rel="stylesheet" type="text/css" href="killer.css">
     <title>DemonKiller</title>
   </head>
@@ -15,38 +16,97 @@
     <div id="sliding_panel">
       <div id="slider_content">
         <div class="page" id="page_tired_terra">
-          <div class="right">
-          </div>
           <div class="left">
             <table id="units_table">
               <tr>
                 <td><button class="table_button" id="farmer"></button></td>
-                <td><button class="table_quantity" id="farmer_quantity"></button></td>
               </tr>
               <tr>
                 <td><button class="table_button" id="barmaid"></button></td>
-                <td><button class="table_quantity" id="barmaid_quantity"></button></td>
               </tr>
               <tr>
                 <td><button class="table_button" id="militiaman"></button></td>
-                <td><button class="table_quantity" id="militiaman_quantity"></button></td>
               </tr>
               <tr>
                 <td><button class="table_button" id="barbarian"></button></td>
-                <td><button class="table_quantity" id="barbarian_quantity"></button></td>
               </tr>
               <tr>
                 <td><button class="table_button" id="valkyrie"></button></td>
-                <td><button class="table_quantity" id="valkyrie_quantity"></button></td>
               </tr>
               <tr>
                 <td><button class="table_button" id="demigod"></button></td>
-                <td><button class="table_quantity" id="demigod_quantity"></button></td>
+              </tr>
+            </table>
+          </div>
+          <div class="right">
+            <table id="unit_stats_table">
+              <tr>
+                <td><pre class="table_text" id="farmer_stats"></pre></td>
+              </tr>
+              <tr>
+                <td><pre class="table_text" id="barmaid_stats"></pre></td>
+              </tr>
+              <tr>
+                <td><pre class="table_text" id="militiaman_stats"></pre></td>
+              </tr>
+              <tr>
+                <td><pre class="table_text" id="barbarian_stats"></pre></td>
+              </tr>
+              <tr>
+                <td><pre class="table_text" id="valkyrie_stats"></pre></td>
+              </tr>
+              <tr>
+                <td><pre class="table_text" id="demigod_stats"></pre></td>
               </tr>
             </table>
           </div>
         </div>
-        <div id = "page_raucous_reach" class="page"></div>
+        <div class="page" id="page_raucous_reach">
+          <div class="left">
+            <table id="units_table">
+              <tr>
+                <td><button class="table_button" id="vial"></button></td>
+              </tr>
+              <tr>
+                <td><button class="table_button" id="flask"></button></td>
+              </tr>
+              <tr>
+                <td><button class="table_button" id="jug"></button></td>
+              </tr>
+              <tr>
+                <td><button class="table_button" id="pool"></button></td>
+              </tr>
+              <tr>
+                <td><button class="table_button" id="basin"></button></td>
+              </tr>
+              <tr>
+                <td><button class="table_button" id="ocean"></button></td>
+              </tr>
+            </table>
+          </div>
+          <div class="right">
+            <table id="unit_stats_table">
+              <tr>
+                <td><pre class="table_text" id="vial_stats"></pre></td>
+              </tr>
+              <tr>
+                <td><pre class="table_text" id="flask_stats"></pre></td>
+              </tr>
+              <tr>
+                <td><pre class="table_text" id="jug_stats"></pre></td>
+              </tr>
+              <tr>
+                <td><pre class="table_text" id="pool_stats"></pre></td>
+              </tr>
+              <tr>
+                <td><pre class="table_text" id="basin_stats"></pre></td>
+              </tr>
+              <tr>
+                <td><pre class="table_text" id="ocean_stats"></pre></td>
+              </tr>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
     <div id="bottom">

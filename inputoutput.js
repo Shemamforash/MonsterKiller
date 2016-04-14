@@ -1,4 +1,4 @@
-var deadDemons = 0, demonsKilledPerTick = 1, demonsSouls = 1, buyQuantity = 1;
+var deadDemons = 0, demonsKilledPerTick = 1, demonsSouls = 0, buyQuantity = 1;
 
 function centreText(){
   var textHeight = $('h1').height() / 2;
@@ -64,7 +64,8 @@ function addworldbuttonevents() {
 
 function updateText(){
   deadDemons += demonsKilledPerTick;
-  demonsSouls += Math.random() * 0.05 * demonsKilledPerTick;
+  var newSouls = Math.random() * 0.05 * demonsKilledPerTick;
+  var addedSouls = addDemonsSouls(newSouls);
   $('h1').text("You have killed " + deadDemons + " demons...");
   $('h2').text("Demon's souls unbound: " + Math.floor(demonsSouls));
 }

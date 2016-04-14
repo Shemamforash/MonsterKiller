@@ -3,6 +3,7 @@ $(document).ready(start);
 function start(){
   centreText();
   initialiseUnits();
+  initialiseContainers();
   setInterval(updateText, 17);
 };
 
@@ -65,16 +66,15 @@ function unit(name, quantity, buttonId, power, cost, trainQuantity) {
   var self = this;
   this.name = name;
   this.quantity = quantity;
-  this.quantityButton = $('#' + buttonId +'_quantity')[0];
   this.power = power;
   this.cost = cost;
   this.trainQuantity = trainQuantity;
   this.buttonId = buttonId;
 
   $("#" + buttonId)[0].textContent = "no " + self.name + "s";
-  this.quantityButton.textContent = "0";
   $("#" + buttonId)[0].onclick = updatequantity.bind(self);
   setInterval(self.reproduce.bind(self), 1000);
+  $("#" + this.buttonId + "_stats").text("please wait");
 };
 
 unit.prototype.reproduce = function() {
@@ -87,12 +87,23 @@ unit.prototype.reproduce = function() {
 
 unit.prototype.train = function() {
   this.quantity -= this.trainQuantity;
-  this.quantityButton.textContent  = Math.floor(this.quantity).toString();
 }
 
 unit.prototype.updateText = function() {
-  this.quantityButton.textContent = Math.floor(this.quantity).toString();
   $("#" + this.buttonId)[0].textContent = units.getprefix(units.find(this.name, 0));
+  var quantity = Math.round(this.quantity);
+  var quantityString = quantity + " " + this.buttonId + "s\n";
+  if(quantity === 1){
+    quantityString = quantity + " " + this.buttonId + "\n";
+  }
+  var killing = this.quantity * this.power;
+  var killingString = "killing " + Math.round(Math.floor(killing) * 10) / 10 + " demons\n";
+  var producing = units.find(this.name, -1);
+  var producingString = "";
+  if(producing !== null) {
+    producingString = "producing " + this.quantity / 10 + " " + producing.buttonId + "s per second";
+  }
+  $("#" + this.buttonId + "_stats").text(quantityString + killingString + producingString);
 }
 
 function updatequantity(){
@@ -107,9 +118,8 @@ function updatequantity(){
     }
     if(upgrade){
       this.quantity += buyQuantity;
-      this.quantityButton.textContent = Math.floor(this.quantity).toString();
       updatedemonsKilledPerTick(this.power);
-      updateDemonsSouls(-this.cost * buyQuantity);
+      useDemonsSouls(this.cost * buyQuantity);
     }
   }
   this.updateText();
@@ -117,10 +127,6 @@ function updatequantity(){
 
 function updatedemonsKilledPerTick(N){
   demonsKilledPerTick += N;
-}
-
-function updateDemonsSouls(N){
-  demonsSouls += N;
 }
 
 function initialiseUnits(){
