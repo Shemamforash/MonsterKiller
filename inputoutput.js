@@ -6,18 +6,50 @@ function centreText(){
   var windowHeight = $(window).height() / 2;
   var windowWidth = $(window).width() / 2;
   var leftOffset = windowWidth - textWidth;
-  var topOffset = windowHeight - textHeight;
+  var topOffset = windowHeight - textHeight - 50;
   $('h1').css("margin-top", topOffset + "px");
   $('h1').css("margin-left", leftOffset + "px");
   var currentposition = $("#world_selected").position();
   var targetPosition = $('#tired_terra').position();
-  var leftoffset = currentposition.left - targetPosition.left + 5;
+  var leftoffset = currentposition.left - targetPosition.left;
   var topoffset = currentposition.top - targetPosition.top;
   $("#world_selected").css({ top: -topoffset, left: -leftoffset});
   addworldbuttonevents();
 };
 
+function sliderBehaviour() {
+  var slider = $("#slider_content");
+  var children = slider.children();
+  var current = slider.children().first();
+  var width = $(window).width();
+  var totalWidth = width * children.length;
+
+  return function slideTo(event){
+    var target = "page_" + $(event.target).attr("id");
+    var currentPosition = -1, targetPosition = -1;
+    for(i = 0; i < children.length; ++i){
+      if($(children[i]).attr("id") === target){
+        targetPosition = i;
+      }
+      if($(children[i]).attr("id") === $(current).attr("id")){
+        currentPosition = i;
+      }
+    }
+    if(currentPosition != -1 && targetPosition != -1) {
+      var distance = width * (targetPosition - currentPosition);
+      slider.animate({
+        left: "-=" + distance.toString(),
+      }, 200, function() {
+      });
+      current = children[targetPosition];
+    }
+  };
+};
+
 function addworldbuttonevents() {
+  var currentpage = "#page_tired_terra";
+
+  $('.world_button').click(sliderBehaviour());
   $('.world_button').click(function() {
     var currentposition = $("#world_selected").position().left;
     var targetPosition = $(this).position().left;
