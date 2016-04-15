@@ -1,4 +1,4 @@
-var deadDemons = 0, demonsKilledPerTick = 1, demonsSouls = 0, buyQuantity = 1, demonsSoulsPerSecond = 0;
+var buyQuantity = 1;
 
 function centreText(){
   var textHeight = $('h1').height() / 2;
@@ -27,7 +27,7 @@ function sliderBehaviour() {
   return function slideTo(event){
     var target = "page_" + $(event.target).attr("id");
     var currentPosition = -1, targetPosition = -1;
-    for(i = 0; i < children.length; ++i){
+    for(var i = 0; i < children.length; ++i){
       if($(children[i]).attr("id") === target){
         targetPosition = i;
       }
@@ -62,12 +62,26 @@ function addworldbuttonevents() {
   });
 };
 
-function updateText(){
-  deadDemons += demonsKilledPerTick;
-  demonsSoulsPerSecond = 0.05 * demonsKilledPerTick;
-  var addedSouls = addDemonsSouls(demonsSoulsPerSecond);
-  $('h1').text("You have killed " + deadDemons + " demons...");
-  $('h2').text("Demon's souls unbound: " + Math.floor(demonsSouls));
+function updateAllText(){
+  var i;
+  for(i = 0; i < units.length(); ++i){
+    units.get(i).updateText();
+    kills.add(units.get(i).power * units.get(i).quantity);
+  }
+  for(i = 0; i < containers.length(); ++i){
+    containers.get(i).updateText();
+  }
+  for(i = 0; i < weapons.length(); ++i){
+    weapons.get(i).updateText();
+  }
+  updateBackgroundText();
+}
+
+function updateBackgroundText(){
+  var killRate = kills.update();
+  var addedSouls = souls.updateQuantities();
+  $('h1').text("You have killed " + Math.round(kills.total()) + " demons...");
+  $('h2').text("Demon's souls unbound: " + Math.floor(souls.remaining()) + " (" + Math.round(addedSouls * 10) / 10 + "sps)");
 }
 
 function keyDown(event) {

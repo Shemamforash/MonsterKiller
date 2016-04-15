@@ -82,14 +82,12 @@ function addDemonsSouls(N){
       }
       containers.get(i).currentQuantity += amountToAdd;
     }
-    containers.get(i).updateText();
   }
-  demonsSouls += totalAdded - N;
   return totalAdded - N;
 };
 
 function useDemonsSouls(N){
-  for(i = 0; i < containers.length(); ++i) {
+  for(i = containers.length() - 1; i >= 0; --i) {
     var totalSouls = containers.get(i).currentQuantity;
     var amountToRemove = 0;
     if(totalSouls >= N){
@@ -98,9 +96,8 @@ function useDemonsSouls(N){
       amountToRemove = totalSouls;
     }
     containers.get(i).currentQuantity -= amountToRemove;
-    containers.get(i).updateText();
   }
-  demonsSouls -= N;
+  return N;
 }
 
 container.prototype.getRemainingSpace = function() {
@@ -119,15 +116,14 @@ container.prototype.updateText = function() {
 }
 
 function updatesize(){
-  if(demonsSouls >= this.cost * buyQuantity && this.percent + buyQuantity <= 100){
+  if(souls.remaining() >= this.cost * buyQuantity && this.percent + buyQuantity <= 100){
       this.percent += buyQuantity;
-      useDemonsSouls(this.cost * buyQuantity);
+      souls.consume(this.cost * buyQuantity);
   }
-  this.updateText();
 };
 
 function initialiseContainers(){
-  containers.add(new container("vacuous vial", 20, "vial", 2));
+  containers.add(new container("vacuous vial", 20, "vial", 1));
   containers.add(new container("fractured flask", 200, "flask", 8));
   containers.add(new container("generous jug", 2000, "jug", 32));
   containers.add(new container("perplexing pool", 20000, "pool", 128));

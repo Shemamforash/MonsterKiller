@@ -1,5 +1,3 @@
-var demonsSoulsUsedPerSecond = 0;
-
 var weapons = (function() {
     var weaponlist = [];
     var sizes = ["a silent", "a sighing", "a whispering", "a moaning", "a wailing", "a shouting", "a clamouring", "a roaring", "a screaming", "a deafening", "a thunderous"];
@@ -35,7 +33,6 @@ var weapons = (function() {
           return "baditem";
         }
     };
-
 })();
 
 function weapon(name, powerUnit, buttonId, cooldownTimer, damage) {
@@ -51,67 +48,49 @@ function weapon(name, powerUnit, buttonId, cooldownTimer, damage) {
   this.cooldown = cooldownTimer;
   setInterval(fire.bind(self), cooldownTimer);
   this.damage = damage;
+  this.textField = $($("#" + buttonId)[0]);
+  this.statsField = $("#" + this.buttonId + "_stats");
 
-  $($("#" + buttonId)[0]).text("a silent " + self.name);
-  $($("#" + buttonId)[0]).siblings("button")[0].onclick = upgrade.bind(self);
-  $($("#" + buttonId)[0]).siblings("button")[1].onclick = downgrade.bind(self);
-  $("#" + this.buttonId + "_stats").text("the " + self.name + " is off");
+  this.textField.text("a silent " + self.name);
+  this.textField.siblings("button")[0].onclick = upgrade.bind(self);
+  this.textField.siblings("button")[1].onclick = downgrade.bind(self);
+  this.statsField.text("the " + self.name + " is off");
 };
 
 weapon.prototype.updateText = function() {
-  $($("#" + this.buttonId)[0]).text(weapons.getprefix(weapons.find(this.name, 0)));
+  this.textField.text(weapons.getprefix(weapons.find(this.name, 0)));
   if(this.tier === 0){
-    $("#" + this.buttonId + "_stats").text("the " + this.name + " is off");
+    this.statsField.text("the " + this.name + " is off");
   } else {
     var consumingString = "consuming " + this.soulsConsumed + " souls\n";
-    var damageString = "outputting " + Math.pow(this.damage, tier) + " " + this.powerUnit;
-    $("#" + this.buttonId + "_stats").text(consumingString + damageString);
+    var damageString = "outputting " + Math.pow(this.damage, this.tier) + " " + this.powerUnit;
+    this.statsField.text(consumingString + damageString);
   }
 }
 
 function fire() {
-  if(demonsSoulsUsedPerSecond > demonsSoulsPerSecond){
-    shutdownWeapons();
+  if(souls.remaining() <= this.soulsConsumed){
+    this.tier = 0;
+    this.soulsConsumed = 0;
   } else {
-    useDemonsSouls(this.soulsConsumed);
+    souls.consume(this.soulsConsumed);
     //Do the damage;
   }
 }
 
 function upgrade() {
-  this.tier += 1;
-  if(demonsSouls >= Math.pow(this.tier, 1)) {
-    useDemonsSouls(Math.pow(this.tier, 10));
-    changeTier(this);
+  if(souls.remaining() >= Math.pow(this.tier, 10)) {
+    this.tier += 1;
+    souls.consume(Math.pow(this.tier, 10));
+    this.soulsConsumed = Math.pow(W.tier, 2);
+
   }
 }
 
 function downgrade() {
   if(this.tier > 0){
     this.tier -= 1;
-  }
-  changeTier(this);
-}
-
-function changeTier(W){
-  W.soulsConsumed = Math.pow(W.tier, 2);
-  updateSoulsUsed();
-  W.updateText();
-}
-
-function updateSoulsUsed() {
-  demonsSoulsUsedPerSecond = 0;
-  for(i = 0; i < weapons.length(); ++i){
-    demonsSoulsUsedPerSecond += weapons.get(i).soulsConsumed * weapons.get(i).cooldown;
-  }
-}
-
-function shutdownWeapons() {
-  demonsSoulsUsedPerSecond = 0;
-  for(i = 0; i < weapons.length(); ++i){
-    weapons.get(i).tier = 0;
-    weapons.get(i).soulsConsumed = 0;
-    weapons.get(i).updateText();
+    this.soulsConsumed = Math.pow(W.tier, 2);
   }
 }
 

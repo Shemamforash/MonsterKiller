@@ -5,13 +5,16 @@ function start(){
   initialiseUnits();
   initialiseContainers();
   initialiseweapons();
-  setInterval(updateText, 17);
+  setInterval(updateAllText, 17);
 };
 
 var units = (function() {
     var unitlist = [];
     var sizes = ["a", "a few", "several", "a dozen", "a mob of", "a batallion of", "an army of", "a horde of", "a legion of"];
     return {
+        length: function() {
+          return unitlist.length;
+        },
         add: function(U) {
             unitlist.push(U);
         },
@@ -70,65 +73,68 @@ function unit(name, quantity, buttonId, power, cost, trainQuantity) {
   this.power = power;
   this.cost = cost;
   this.trainQuantity = trainQuantity;
-  this.buttonId = buttonId;
+  this.button = $("#" + buttonId)[0];
+  this.statsButton = $("#" + buttonId + "_stats");
 
-  $("#" + buttonId)[0].textContent = "no " + self.name + "s";
-  $("#" + buttonId)[0].onclick = updatequantity.bind(self);
+  this.button.textContent = "no " + self.name + "s";
+  this.button.onclick = updatequantity.bind(self);
   setInterval(self.reproduce.bind(self), 1000);
-  $("#" + this.buttonId + "_stats").text("please wait");
+  this.statsButton.text("please wait");
 };
 
 unit.prototype.reproduce = function() {
     var prev = units.find(this.name, -1);
     if(prev != null){
       prev.quantity += this.quantity / 10;
+      kills.add(prev.power * this.quantity / 10);
     }
-    this.updateText();
 }
 
-unit.prototype.train = function() {
-  this.quantity -= this.trainQuantity;
+unit.prototype.train = function(N) {
+  this.quantity -= this.trainQuantity * N;
 }
 
 unit.prototype.updateText = function() {
-  $("#" + this.buttonId)[0].textContent = units.getprefix(units.find(this.name, 0));
+  this.button.textContent = units.getprefix(units.find(this.name, 0));
   var quantity = Math.round(this.quantity);
-  var quantityString = quantity + " " + this.buttonId + "s\n";
+  var quantityString = quantity + " " + this.name + "s\n";
   if(quantity === 1){
-    quantityString = quantity + " " + this.buttonId + "\n";
+    quantityString = quantity + " " + this.name + "\n";
   }
-  var killing = this.quantity * this.power;
-  var killingString = "killing " + Math.round(Math.floor(killing) * 10) / 10 + " demons\n";
+  var killingString = "killing " + (Math.floor(this.quantity * this.power) * 10) / 10 + " demons\n";
   var producing = units.find(this.name, -1);
   var producingString = "";
   if(producing !== null) {
-    producingString = "producing " + Math.round(this.quantity / 10) + " " + producing.buttonId + "s per second";
+    producingString = "producing " + Math.round(this.quantity / 10) + " " + producing.name + "s per second";
   }
-  $("#" + this.buttonId + "_stats").text(quantityString + killingString + producingString);
+  this.statsButton.text(quantityString + killingString + producingString);
 }
 
 function updatequantity(){
-  if(demonsSouls >= this.cost * buyQuantity){
-    var prev = units.find(this.name, -1);
-    var upgrade = false;
-    if(prev === null){
-      upgrade = true;
-    } else if(prev.quantity >= prev.trainQuantity){
-      prev.train();
-      upgrade = true;
-    }
-    if(upgrade){
-      this.quantity += buyQuantity;
-      updatedemonsKilledPerTick(this.power);
-      useDemonsSouls(this.cost * buyQuantity);
-    }
+  var toBuy = buyQuantity;
+  if(100 - this.quantity < buyQuantity) {
+    buyQuantity = 100 - this.quantity;
   }
-  this.updateText();
+  if (souls.remaining() < this.cost * toBuy) {
+    toBuy = Math.floor(demonsSouls / this.cost);
+  }
+  var prev = units.find(this.name, -1);
+  var upgrade = false;
+  if(prev === null){
+    upgrade = true;
+  } else {
+    if(prev.quantity < prev.trainQuantity * toBuy) {
+      toBuy = Math.floor(prev.quantity / prev.trainQuantity);
+    }
+    prev.train(toBuy);
+    upgrade = true;
+  }
+  if(upgrade){
+    this.quantity += toBuy;
+    souls.consume(this.cost * toBuy);
+  }
+  updateAllText();
 };
-
-function updatedemonsKilledPerTick(N){
-  demonsKilledPerTick += N;
-}
 
 function initialiseUnits(){
   units.add(new unit("forgetful farmer", 0, "farmer", 1, 1, 20));
