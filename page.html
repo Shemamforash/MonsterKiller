@@ -2,9 +2,10 @@
 <html>
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="main.js"></script>
+    <script src="tired.js"></script>
     <script src="inputoutput.js"></script>
     <script src="raucous.js"></script>
+    <script src="deepest.js"></script>
     <link rel="stylesheet" type="text/css" href="killer.css">
     <title>DemonKiller</title>
   </head>
@@ -17,111 +18,96 @@
       <div id="slider_content">
         <div class="page" id="page_tired_terra">
           <div class="left">
-            <table id="units_table">
-              <tr>
-                <td><button class="table_button" id="farmer"></button></td>
-              </tr>
-              <tr>
-                <td><button class="table_button" id="barmaid"></button></td>
-              </tr>
-              <tr>
-                <td><button class="table_button" id="militiaman"></button></td>
-              </tr>
-              <tr>
-                <td><button class="table_button" id="barbarian"></button></td>
-              </tr>
-              <tr>
-                <td><button class="table_button" id="valkyrie"></button></td>
-              </tr>
-              <tr>
-                <td><button class="table_button" id="demigod"></button></td>
-              </tr>
-            </table>
+            <button class="table_button" id="farmer"></button>
+            <button class="table_button" id="barmaid"></button>
+            <button class="table_button" id="militiaman"></button>
+            <button class="table_button" id="barbarian"></button>
+            <button class="table_button" id="valkyrie"></button>
+            <button class="table_button" id="demigod"></button>
           </div>
           <div class="right">
-            <table id="unit_stats_table">
-              <tr>
-                <td><pre class="table_text" id="farmer_stats"></pre></td>
-              </tr>
-              <tr>
-                <td><pre class="table_text" id="barmaid_stats"></pre></td>
-              </tr>
-              <tr>
-                <td><pre class="table_text" id="militiaman_stats"></pre></td>
-              </tr>
-              <tr>
-                <td><pre class="table_text" id="barbarian_stats"></pre></td>
-              </tr>
-              <tr>
-                <td><pre class="table_text" id="valkyrie_stats"></pre></td>
-              </tr>
-              <tr>
-                <td><pre class="table_text" id="demigod_stats"></pre></td>
-              </tr>
-            </table>
+            <pre class="text_box" id="farmer_stats"></pre>
+            <pre class="text_box" id="barmaid_stats"></pre>
+            <pre class="text_box" id="militiaman_stats"></pre>
+            <pre class="text_box" id="barbarian_stats"></pre>
+            <pre class="text_box" id="valkyrie_stats"></pre>
+            <pre class="text_box" id="demigod_stats"></pre>
           </div>
         </div>
         <div class="page" id="page_raucous_reach">
           <div class="left">
-            <table id="units_table">
-              <tr>
-                <td><button class="table_button" id="vial"></button></td>
-              </tr>
-              <tr>
-                <td><button class="table_button" id="flask"></button></td>
-              </tr>
-              <tr>
-                <td><button class="table_button" id="jug"></button></td>
-              </tr>
-              <tr>
-                <td><button class="table_button" id="pool"></button></td>
-              </tr>
-              <tr>
-                <td><button class="table_button" id="basin"></button></td>
-              </tr>
-              <tr>
-                <td><button class="table_button" id="ocean"></button></td>
-              </tr>
-            </table>
+            <button class="table_button" id="vial"></button>
+            <button class="table_button" id="flask"></button>
+            <button class="table_button" id="jug"></button>
+            <button class="table_button" id="pool"></button>
+            <button class="table_button" id="basin"></button>
+            <button class="table_button" id="ocean"></button>
           </div>
           <div class="right">
-            <table id="unit_stats_table">
-              <tr>
-                <td><pre class="table_text" id="vial_stats"></pre></td>
-              </tr>
-              <tr>
-                <td><pre class="table_text" id="flask_stats"></pre></td>
-              </tr>
-              <tr>
-                <td><pre class="table_text" id="jug_stats"></pre></td>
-              </tr>
-              <tr>
-                <td><pre class="table_text" id="pool_stats"></pre></td>
-              </tr>
-              <tr>
-                <td><pre class="table_text" id="basin_stats"></pre></td>
-              </tr>
-              <tr>
-                <td><pre class="table_text" id="ocean_stats"></pre></td>
-              </tr>
-            </table>
+            <pre class="text_box" id="vial_stats"></pre>
+            <pre class="text_box" id="flask_stats"></pre>
+            <pre class="text_box" id="jug_stats"></pre>
+            <pre class="text_box" id="pool_stats"></pre>
+            <pre class="text_box" id="basin_stats"></pre>
+            <pre class="text_box" id="ocean_stats"></pre>
+          </div>
+        </div>
+        <div class="page" id="page_deepest_depths">
+          <div class="left">
+            <div class="wrapper">
+              <p class="text_box" id="laser"></p>
+              <button>+</button>
+              <button>-</button>
+            </div>
+
+            <div class="wrapper">
+              <p class="text_box" id="flamethrower"></p>
+              <button>+</button>
+              <button>-</button>
+            </div>
+            <div class="wrapper">
+              <p class="text_box" id="electromagnet"></p>
+              <button>+</button>
+              <button>-</button>
+            </div>
+
+            <div class="wrapper">
+              <p class="text_box" id="fulmination"></p>
+              <button>+</button>
+              <button>-</button>
+            </div>
+            <div class="wrapper">
+              <p class="text_box" id="plasma"></p>
+              <button>+</button>
+              <button>-</button>
+            </div>
+
+            <div class="wrapper">
+              <p class="text_box" id="railgun"></p>
+              <button>+</button>
+              <button>-</button>
+            </div>
+          </div>
+          <div class="right">
+            <pre class="text_box" id="laser_stats"></pre>
+            <pre class="text_box" id="flamethrower_stats"></pre>
+            <pre class="text_box" id="electromagnet_stats"></pre>
+            <pre class="text_box" id="fulmination_stats"></pre>
+            <pre class="text_box" id="plasma_stats"></pre>
+            <pre class="text_box" id="railgun_stats"></pre>
           </div>
         </div>
       </div>
     </div>
     <div id="bottom">
-      <table id="world_table">
-        <tr>
-          <td><button class="world_button" id="tired_terra">the tired terra</button></td>
-          <td><button class="world_button" id="raucous_reach">the raucous reach</button></td>
-          <!-- <td><button class="world_button" id="deepest_depths">the deepest depths</button></td> -->
-          <!-- <td><button class="world_button" id="worrisome_wasteland">the worrisome wasteland</button></td> -->
-          <!-- <td><button class="world_button" id="frigid_forest">the frigid forest</button></td> -->
-          <!-- <td><button class="world_button" id="derelict_desert">the derelict desert</button></td> -->
-          <!-- <td><button class="world_button" id="copius_canopy">the copious canopy</button></td> -->
-          <!-- <td><button class="world_button" id="noxius_nightmare">the noxious nightmare</button></td> -->
-        </tr>
-      </table>
+      <button class="world_button" id="tired_terra">the tired terra</button>
+      <button class="world_button" id="raucous_reach">the raucous reach</button>
+      <button class="world_button" id="deepest_depths">the deepest depths</button>
+      <button class="world_button" id="worrisome_wasteland">the worrisome wasteland</button>
+      <button class="world_button" id="frigid_forest">the frigid forest</button>
+      <button class="world_button" id="derelict_desert">the derelict desert</button>
+      <button class="world_button" id="copius_canopy">the copious canopy</button>
+      <button class="world_button" id="noxius_nightmare">the noxious nightmare</button>
       <div id="world_selected"></div>
     </div>
   </body>

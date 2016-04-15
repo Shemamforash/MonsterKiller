@@ -39,7 +39,7 @@ var containers = (function() {
               return sizes[4] + " " + name;
             } else if (q < 90){
               return sizes[5] + " " + name;
-            } else if (q === 100){
+            } else if (q <= 100){
               return sizes[6] + " " + name;
             }
           }
@@ -81,9 +81,6 @@ function addDemonsSouls(N){
         N -= remainingSpace;
       }
       containers.get(i).currentQuantity += amountToAdd;
-      if(N === 0){
-        break;
-      }
     }
     containers.get(i).updateText();
   }
@@ -122,9 +119,9 @@ container.prototype.updateText = function() {
 }
 
 function updatesize(){
-  if(demonsSouls >= this.cost && this.percent < 100){
-      this.percent += 1;
-      useDemonsSouls(this.cost);
+  if(demonsSouls >= this.cost * buyQuantity && this.percent + buyQuantity <= 100){
+      this.percent += buyQuantity;
+      useDemonsSouls(this.cost * buyQuantity);
   }
   this.updateText();
 };

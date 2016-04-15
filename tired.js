@@ -4,6 +4,7 @@ function start(){
   centreText();
   initialiseUnits();
   initialiseContainers();
+  initialiseweapons();
   setInterval(updateText, 17);
 };
 
@@ -101,7 +102,7 @@ unit.prototype.updateText = function() {
   var producing = units.find(this.name, -1);
   var producingString = "";
   if(producing !== null) {
-    producingString = "producing " + this.quantity / 10 + " " + producing.buttonId + "s per second";
+    producingString = "producing " + Math.round(this.quantity / 10) + " " + producing.buttonId + "s per second";
   }
   $("#" + this.buttonId + "_stats").text(quantityString + killingString + producingString);
 }

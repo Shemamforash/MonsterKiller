@@ -1,17 +1,23 @@
 /*Background elements*/
+body {
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  text-align: center;
+  font-family: arial;
+  font-size: 17;
+  margin: 0px;
+  padding: 0px;
+}
+
 h1 {
   font-family: monospace;
   font-size: 50;
-  color: white;
-  text-align: center;
   width: 600;
 }
 
 h2 {
  font-family: monospace;
  font-size: 30;
- color: white;
- text-align: center;
  width: 600;
 }
 
@@ -19,11 +25,20 @@ h2 {
   height: 100%;
   width: 100%;
   position: fixed;
-  margin: auto;
+  background-color: black;
+  margin: 0px;
   z-index: -1;
 }
 
-/*sliding panel elements*/
+/*Sliding panel elements*/
+
+#wrapper {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid green;
+}
 
 #sliding_panel {
   position: fixed;
@@ -40,34 +55,30 @@ h2 {
   width: 1000%;
 }
 
+/*Page and page dividers*/
+
 .page {
   width: 10%;
   height: 100%;
   float: left;
 }
 
-/*Left hand table elements*/
-table {
-  border-style: none;
-  background-color: rgba(0, 0, 0, 0);
-}
-
 .left {
-  /*position: absolute;*/
   top: 0px;
-  width: 340px;
+  left: 0px;
+  width: 25%;
   height: 100%;
   float: left;
-  left: 0px;
+  padding: 20px;
 }
 
 .right {
-  float: right;
-  width: 340px;
-  height: 100%;
   top: 0px;
   right: 0px;
-  width: 340px;
+  width: 25%;
+  height: 100%;
+  float: right;
+  padding: 20px;
 }
 
 #bottom {
@@ -76,76 +87,79 @@ table {
   left: 0px;
   height: 10%;
   width: 100%;
-  clear: both;
 }
 
-.world_button {
-  height: 30px;
-  width: 160px;
-  word-wrap: normal;
-  background-color: rgba(0, 0, 0, 0);
-  color: white;
-  border: none;
-}
-
-#world_table {
-  margin: auto;
-  height: 100%;
-}
+/*The sliding div over the world selection*/
 
 #world_selected {
   position: relative;
   width: 159px;
   height: 30px;
   background-color: #666666;
-  border: none;
   z-index: -1;
 }
 
-.world_button:hover {
-  background-color: #151515;
+/*Text boxes*/
+
+.text_box {
+  vertical-align: middle;
+  height: 40px;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0px;
 }
 
-.world_button:active {
-  background-color: #AAAAAA;
-  color: #151515;
+.right .text_box {
+  text-align: right;
+  height: 80px;
+  float: right;
+  width: 100%;
 }
 
-/*Left table*/
-
-#units_table {
-  padding-top: 10px;
+.left .text_box {
+  text-align: left;
+  float: left;
+  width: 80%;
+  height: 40px;
+  line-height: 40px;
 }
 
-.table_text {
-  width: 300px;
-  height: 60px;
+/*Button behaviours*/
+
+button {
+  height: 40px;
   font-size: 17px;
-  background-color: black;
+  transition-duration: 0.2;
+  background-color: rgba(0, 0, 0, 0);
   color: white;
   border: none;
-  text-align: right;
+  text-align: left;
   vertical-align: middle;
   font-family: arial;
 }
 
-.table_button {
-  width: 340px;
-  height: 40px;
-  font-size: 17px;
-  background-color: black;
-  color: white;
-  transition-duration: 0.2;
-  border: none;
-  text-align: left;
-  font-family: arial;
+.left button {
+  width: 100%;
+  float: left;
 }
 
-.table_button:hover {
+.wrapper button {
+  width: 9%;
+  float: left;
+}
+
+.world_button {
+  height: 30px;
+  width: 160px;
+  text-align: center;
+  font-size: 13px;
+}
+
+button:hover {
   background-color: #151515;
 }
 
-.table_button:active {
+button:active {
   background-color: #AAAAAA;
   color: #151515;
 }
