@@ -112,9 +112,6 @@ unit.prototype.updateText = function() {
 
 function updatequantity(){
   var toBuy = buyQuantity;
-  if(100 - this.quantity < buyQuantity) {
-    buyQuantity = 100 - this.quantity;
-  }
   if (souls.remaining() < this.cost * toBuy) {
     toBuy = Math.floor(demonsSouls / this.cost);
   }
@@ -137,7 +134,7 @@ function updatequantity(){
 };
 
 function initialiseUnits(){
-  units.add(new unit("forgetful farmer", 0, "farmer", 1, 1, 20));
+  units.add(new unit("forgetful farmer", 1, "farmer", 1, 1, 20));
   units.add(new unit("busty barmaid", 0, "barmaid", 5, 10, 15));
   units.add(new unit("maimed militiaman", 0, "militiaman", 25, 100, 10));
   units.add(new unit("beastly barbarian", 0, "barbarian", 125, 1000, 6));
