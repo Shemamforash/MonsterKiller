@@ -69,21 +69,23 @@ weapon.prototype.updateText = function() {
 }
 
 function fire() {
-  if(souls.remaining() <= this.soulsConsumed){
+  if(this.soulsConsumed > 0){
+    alert(this.soulsConsumed);
+  }
+  if(souls.remaining() < this.soulsConsumed){
     this.tier = 0;
     this.soulsConsumed = 0;
-  } else {
+  } else if (soulsConsumed > 0) {
     souls.consume(this.soulsConsumed);
     //Do the damage;
   }
 }
 
 function upgrade() {
-  if(souls.remaining() >= Math.pow(this.tier, 10)) {
+  if(souls.remaining() >= Math.pow(this.tier + 1, 10)) {
     this.tier += 1;
     souls.consume(Math.pow(this.tier, 10));
     this.soulsConsumed = Math.pow(W.tier, 2);
-
   }
 }
 
