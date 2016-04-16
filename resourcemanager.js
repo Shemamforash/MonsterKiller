@@ -20,7 +20,7 @@ var kills = (function() {
 
 var souls = (function() {
   var soulsToConsume = 0;
-  var totalSouls = 0;
+  var totalSouls = 1;
   var soulsToAdd = 0;
   return {
     remaining : function() {
@@ -39,17 +39,18 @@ var souls = (function() {
     },
     updateQuantities : function(){
       var difference = soulsToAdd - soulsToConsume;
-      if(soulsToAdd >= soulsToConsume) {
-        soulsToAdd -= soulsToConsume;
-        soulsToConsume = 0;
-      }
-      var added = addDemonsSouls(soulsToAdd);
-      var consumed = useDemonsSouls(soulsToConsume);
-      totalSouls += added;
-      totalSouls -= consumed;
+      totalSouls += addDemonsSouls(soulsToAdd);
+      totalSouls -= useDemonsSouls(soulsToConsume);
       soulsToAdd = 0;
       soulsToConsume = 0;
       return difference;
     }
   }
 })();
+
+function updateSoulsUsed() {
+  demonsSoulsUsedPerSecond = 0;
+  for(i = 0; i < weapons.length(); ++i){
+    demonsSoulsUsedPerSecond += weapons.get(i).soulsConsumed * weapons.get(i).cooldown;
+  }
+}

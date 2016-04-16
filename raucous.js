@@ -87,33 +87,17 @@ function addDemonsSouls(N){
 };
 
 function useDemonsSouls(N){
-  if(N < 0){
-    alert("you cannot use less than 0 demons souls");
-  }
-  var used = 0;
-  for(i = containers.length() - 1; i >= 0; --i) {    
-    //Number of souls in this container
-    var totalSouls = Math.floor(containers.get(i).currentQuantity);
-    //Number to remove from that container
+  for(i = containers.length() - 1; i >= 0; --i) {
+    var totalSouls = containers.get(i).currentQuantity;
     var amountToRemove = 0;
-    //If there are more (or the same) number of souls in the container as the amount we want to remove then remove N
     if(totalSouls >= N){
       amountToRemove = N;
     } else {
-      //Otherwise remove all the souls in the container
       amountToRemove = totalSouls;
     }
-    used += amountToRemove;
-    if(amountToRemove < 0){
-      alert(used + " "+ amountToRemove + " "+totalSouls);
-    }
     containers.get(i).currentQuantity -= amountToRemove;
-    N -= amountToRemove;
   }
-  if(N != 0){
-    alert("something has gone wrong, used:" + used + ", needed to use N:" + N);
-  }
-  return used;
+  return N;
 }
 
 container.prototype.getRemainingSpace = function() {

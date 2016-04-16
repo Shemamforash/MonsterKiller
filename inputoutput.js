@@ -86,9 +86,6 @@ function updateBackgroundText(){
 
 function keyDown(event) {
   if(event.shiftKey){
-    buyQuantity = 100;
-  }
-  else if(event.ctrlKey){
     buyQuantity = 10;
   }
 }
